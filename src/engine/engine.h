@@ -23,6 +23,8 @@ class Transform2DNode: public Node  {
 public:
     Vector2D localPosition;
     Transform2DNode* parent = nullptr;
+
+    Transform2DNode() {}
     
     Vector2D globalPosition() const {
         if (parent == nullptr) {

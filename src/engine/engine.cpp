@@ -24,5 +24,5 @@ TextNode::TextNode(const char* text, int fontSize, Color color) {
 void TextNode::draw (){
     Vector2D globalPos = globalPosition();
     DrawText(text, globalPos.x, globalPos.y, fontSize, color);
-    std::cout << "DRAW: " << text << " at (" << globalPos.x << ", " << globalPos.y << ")\n";
+    // std::cout << "DRAW: " << text << " at (" << globalPos.x << ", " << globalPos.y << ")\n";
 }
