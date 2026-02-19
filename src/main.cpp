@@ -11,7 +11,7 @@ int main(int argc, char *argv[]) {
     bool shouldQuit = false;
     while (!shouldQuit) {
         BeginDrawing();
-            ClearBackground(RAYWHITE);
+        ClearBackground(RAYWHITE);
         EndDrawing();
 
         PollInputEvents();
