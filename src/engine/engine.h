@@ -21,7 +21,20 @@ struct Vector2D {
 
 class Transform2DNode: public Node  {
 public:
-    Vector2D position;
+    Vector2D localPosition;
+    Transform2DNode* parent = nullptr;
+    
+    Vector2D globalPosition() const {
+        if (parent == nullptr) {
+            return localPosition;
+        }
+        Vector2D parentGlobal = parent->globalPosition();
+        return {parentGlobal.x + localPosition.x, parentGlobal.y + localPosition.y};
+    }
+    
+    void setParent(Transform2DNode* newParent) {
+        parent = newParent;
+    }
 };
 
 class VisualNode: public Transform2DNode {
