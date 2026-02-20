@@ -16,6 +16,7 @@ int main()
     SetTargetFPS(60);
 
     bool showMessageBox = false;
+    int count = 0;
 
     while (!WindowShouldClose())
     {
@@ -24,15 +25,8 @@ int main()
         BeginDrawing();
             ClearBackground(GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR)));
 
-            if (GuiButton((Rectangle){ 24, 24, 120, 30 }, "#191#Show Message")) showMessageBox = true;
+            if (GuiButton((Rectangle){ 24, 24, 120, 30 }, std::to_string(count).c_str())) count++;
 
-            if (showMessageBox)
-            {
-                int result = GuiMessageBox((Rectangle){ 85, 70, 250, 100 },
-                    "#191#Message Box", "Hi! This is a message!", "Nice;Cool");
-
-                if (result >= 0) showMessageBox = false;
-            }
 
         EndDrawing();
     }
