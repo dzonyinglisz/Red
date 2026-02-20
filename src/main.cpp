@@ -15,7 +15,8 @@ int main(int argc, char *argv[])
     Transform2DNode *parent = new Transform2DNode();
     parent->localPosition = {100, 100};
 
-    char* text = NULL;
+    char *text = NULL;
+
     TextNode *childText = new TextNode(&text, 15, RED);
     childText->localPosition = {50, 50};
     childText->setParent(parent);
@@ -32,36 +33,46 @@ int main(int argc, char *argv[])
     float speed = 1.0f;
     float screenWidth = 1024.0f;
 
+    // TODO: find better way to do this without showing errors of invalid convert of `const char*` into `char*`
+    std::string s = "meow";
+    text = (char *)s.data();
+
+    int count = 0;
+
+    ButtonNode *button = new ButtonNode();
+    button->localPosition = {100, 100};
+    button->hitbox.width = 200;
+    button->hitbox.height = 50;
+
+
+
+    button->onMouseDown = [&count](InteractableNode *node)
+    {
+        std::cout << "Button clicked!" << std::endl;
+        count++;
+    };
+
+    parent->children.push_back(button);
+
     bool shouldQuit = false;
     while (!shouldQuit)
     {
         float dt = GetFrameTime() * GetFPS();
-        parent->localPosition.x += speed * dt;
-        parent->localPosition.y = 200.0f + (100.0f*sinf32(parent->localPosition.x/80.0f));
-
-        if (parent->localPosition.x > screenWidth)
-        {
-            parent->localPosition.x = -childText->dimensions().x;
-        }
+    
+        std::string s = std::to_string(count);
+        text = (char *)s.data();
 
         BeginDrawing();
         ClearBackground(BLACK);
-        
+
         engine.root.draw();
-        engine.handleInteractions();
+
         EndDrawing();
-        // TODO: delete
-        // if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-        //     if (text != "meowdy!") {
-        //         text = "meowdy!";
-        //     } else {
-        //         std::string s = std::to_string(childText->dimensions().x);
-        //         text = (char*) s.data();
-        //     }
-        // } 
+
         if (IsKeyPressed(KEY_ESCAPE))
             shouldQuit = true;
-        PollInputEvents();
         
+        engine.handleInteractions();
+        PollInputEvents();
     }
 }
