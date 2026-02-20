@@ -5,7 +5,9 @@
 
 #include <raylib.h>
 #include <iostream>
-#include <./engine/engine.h>
+#include "engine/engine.h"
+#include "engine/button.h"
+#include "engine/text.h"
 
 int main(int argc, char *argv[])
 {
@@ -17,7 +19,7 @@ int main(int argc, char *argv[])
 
     char *text = NULL;
 
-    TextNode *childText = new TextNode(&text, 15, RED);
+    TextNode *childText = new TextNode(&text, 30, RED);
     childText->localPosition = {50, 50};
     childText->setParent(parent);
 
