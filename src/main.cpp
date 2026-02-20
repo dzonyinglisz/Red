@@ -5,76 +5,38 @@
 
 #include <raylib.h>
 #include <iostream>
-#include "engine/engine.h"
-#include "engine/button.h"
-#include "engine/text.h"
+#include "raylib.h"
 
-int main(int argc, char *argv[])
+#define RAYGUI_IMPLEMENTATION
+#include "raygui.h"
+
+int main()
 {
-    Engine engine = Engine();
-    Node root = Node();
-
-    Transform2DNode *parent = new Transform2DNode();
-    parent->localPosition = {100, 100};
-
-    char *text = NULL;
-
-    TextNode *childText = new TextNode(&text, 30, RED);
-    childText->localPosition = {50, 50};
-    childText->setParent(parent);
-
-    parent->children.push_back(childText);
-
-    root.children.push_back(parent);
-    engine.root = root;
-
-    InitWindow(1024, 768, "raylib window");
-
+    InitWindow(1024, 768, "raygui - i forgor");
     SetTargetFPS(60);
 
-    float speed = 1.0f;
-    float screenWidth = 1024.0f;
+    bool showMessageBox = false;
 
-    // TODO: find better way to do this without showing errors of invalid convert of `const char*` into `char*`
-    std::string s = "meow";
-    text = (char *)s.data();
-
-    int count = 0;
-
-    ButtonNode *button = new ButtonNode();
-    button->localPosition = {100, 100};
-    button->hitbox.width = 200;
-    button->hitbox.height = 50;
-
-
-
-    button->onMouseDown = [&count](InteractableNode *node)
+    while (!WindowShouldClose())
     {
-        std::cout << "Button clicked!" << std::endl;
-        count++;
-    };
-
-    parent->children.push_back(button);
-
-    bool shouldQuit = false;
-    while (!shouldQuit)
-    {
-        float dt = GetFrameTime() * GetFPS();
-    
-        std::string s = std::to_string(count);
-        text = (char *)s.data();
-
+        // Draw
+        //----------------------------------------------------------------------------------
         BeginDrawing();
-        ClearBackground(BLACK);
+            ClearBackground(GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR)));
 
-        engine.root.draw();
+            if (GuiButton((Rectangle){ 24, 24, 120, 30 }, "#191#Show Message")) showMessageBox = true;
+
+            if (showMessageBox)
+            {
+                int result = GuiMessageBox((Rectangle){ 85, 70, 250, 100 },
+                    "#191#Message Box", "Hi! This is a message!", "Nice;Cool");
+
+                if (result >= 0) showMessageBox = false;
+            }
 
         EndDrawing();
-
-        if (IsKeyPressed(KEY_ESCAPE))
-            shouldQuit = true;
-        
-        engine.handleInteractions();
-        PollInputEvents();
     }
+
+    CloseWindow();
+    return 0;
 }
