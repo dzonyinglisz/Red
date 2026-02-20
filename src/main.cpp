@@ -4,6 +4,7 @@
 //
 
 #include <raylib.h>
+#include <iostream>
 #include <./engine/engine.h>
 
 int main(int argc, char *argv[])
@@ -14,7 +15,8 @@ int main(int argc, char *argv[])
     Transform2DNode *parent = new Transform2DNode();
     parent->localPosition = {100, 100};
 
-    TextNode *childText = new TextNode("Wah", 15, RED);
+    char* text = NULL;
+    TextNode *childText = new TextNode(&text, 15, RED);
     childText->localPosition = {50, 50};
     childText->setParent(parent);
 
@@ -29,7 +31,6 @@ int main(int argc, char *argv[])
 
     float speed = 1.0f;
     float screenWidth = 1024.0f;
-    float textWidth = 100.0f;
 
     bool shouldQuit = false;
     while (!shouldQuit)
@@ -40,17 +41,27 @@ int main(int argc, char *argv[])
 
         if (parent->localPosition.x > screenWidth)
         {
-            parent->localPosition.x = -textWidth;
+            parent->localPosition.x = -childText->dimensions().x;
         }
 
         BeginDrawing();
         ClearBackground(BLACK);
+        
         engine.root.draw();
+        engine.handleInteractions();
         EndDrawing();
-
-        PollInputEvents();
-
+        // TODO: delete
+        // if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+        //     if (text != "meowdy!") {
+        //         text = "meowdy!";
+        //     } else {
+        //         std::string s = std::to_string(childText->dimensions().x);
+        //         text = (char*) s.data();
+        //     }
+        // } 
         if (IsKeyPressed(KEY_ESCAPE))
             shouldQuit = true;
+        PollInputEvents();
+        
     }
 }

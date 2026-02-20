@@ -40,23 +40,37 @@ public:
 };
 
 class VisualNode: public Transform2DNode {
-
+    public:
+    Vector2D dimensions();
 };
 
 class TextNode: public VisualNode {
 public:
-    TextNode(const char* text = nullptr, int fontSize = 10, Color color = BLUE);
+    TextNode(char** text = nullptr, int fontSize = 10, Color color = BLUE);
     
-    char* text;
+    char** text;
     int fontSize = 10;
     Color color = BLUE;
     virtual void draw();
+    void setText(char** text);
+    Vector2D dimensions();
+};
+
+class Interactable {
+    public:
+        void* onMouseDown();
+        void* onMouseUp();
+        void* onMouseEnter();
+        void* onMouseLeave();
+        void isPressed();
+        void isHovered();
+        Vector2D dimensions();
 };
 
 class Engine {
 public:
     Node root;
-    
+    void handleInteractions();
     // TODO: add more options
 };
 
