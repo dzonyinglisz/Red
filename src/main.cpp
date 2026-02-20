@@ -4,33 +4,26 @@
 //
 
 #include <raylib.h>
-#include <iostream>
-#include "raylib.h"
-
 #define RAYGUI_IMPLEMENTATION
 #include "raygui.h"
 
+#include "game_main.h"
+#include "core/engine.h"
+
 int main()
 {
+    Engine engine;
+
     InitWindow(1024, 768, "raygui - i forgor");
     SetTargetFPS(60);
 
-    bool showMessageBox = false;
-    int count = 0;
+    game_main(&engine);
 
     while (!WindowShouldClose())
     {
-        // Draw
-        //----------------------------------------------------------------------------------
-        BeginDrawing();
-            ClearBackground(GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR)));
-
-            if (GuiButton((Rectangle){ 24, 24, 120, 30 }, std::to_string(count).c_str())) count++;
-
-
-        EndDrawing();
+        engine.process(GetFrameTime());
+        engine.draw();
     }
-
     CloseWindow();
     return 0;
 }
