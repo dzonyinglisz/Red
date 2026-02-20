@@ -42,7 +42,7 @@ bool Engine::removeProcessFunc(void (*function)(double)) {
 }
 
 bool Engine::changeProcessPriority(void (*function)(double), int priority) {
-    const int currentPriority = getDrawPriority(function);
+    const int currentPriority = getProcessPriority(function);
 
     if (currentPriority == -1) {
         return false; // Function not found
