@@ -5,7 +5,7 @@
 #ifndef REDPROJECT_CYFRAENTITY_H
 #define REDPROJECT_CYFRAENTITY_H
 
-#include "backend/entities/entity.h"
+#include "game/entities/entity.h"
 
 
 // Works similarly to foxy in FNaF 1
