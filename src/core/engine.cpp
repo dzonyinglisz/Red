@@ -9,7 +9,6 @@
 
 
 void Engine::process(const double deltaTime) const {
-    PollInputEvents();
     for (void (*func)(double) : activeProcessFunctions) {
         (*func)(deltaTime); // Call the function
     }
