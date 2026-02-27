@@ -5,7 +5,7 @@
 
 #include <raylib.h>
 #define RAYGUI_IMPLEMENTATION
-#include "raygui.h"
+#include "core/raygui.h"
 
 #include "game_main.h"
 #include "core/engine.h"

@@ -4,7 +4,7 @@
 
 #include <string>
 
-#include "raygui.h"
+#include "../core/raygui.h"
 #include "core/engine.h"
 
 
