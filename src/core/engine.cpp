@@ -6,7 +6,7 @@
 
 #include <algorithm>
 #include "raylib.h"
-
+#include <string>
 
 void Engine::process(const double deltaTime) const {
     for (void (*func)(double) : activeProcessFunctions) {
@@ -112,4 +112,10 @@ int Engine::getDrawPriority(void (*function)()) const {
         return static_cast<int>(i);
     }
     return -1;
+}
+
+void Engine::loadStuff() const {
+    Image bgImage = LoadImage("C:/Users/3tpe/source/repos/dzonyinglisz/Red/src/game/assets/images/fnaf.png");
+    ExportImageAsCode(bgImage, "C:/Users/3tpe/source/repos/dzonyinglisz/Red/src/game/assets/images/fnaf.h");
+    UnloadImage(bgImage);
 }

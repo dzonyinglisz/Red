@@ -30,6 +30,9 @@ public:
     bool changeDrawPriority(void (*function)(), int priority);
     int getDrawPriority(void (*function)()) const;
 
+    // Load textures and stuff
+    void loadStuff() const;
+
 private:
     std::vector<void (*)(double)> activeProcessFunctions;
     std::vector<void (*)()> activeDrawFunctions;

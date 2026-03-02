@@ -17,6 +17,8 @@ int main()
     InitWindow(1024, 768, "raygui - i forgor");
     SetTargetFPS(60);
 
+    engine.loadStuff();
+
     game_main(&engine);
 
     while (!WindowShouldClose())
