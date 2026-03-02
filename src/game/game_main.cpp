@@ -16,11 +16,6 @@ void game_main(Engine *engine) {
     engine->addDrawFunc(&draw_game);
 }
 
-void draw_map(const Vector2 p) {
-    DrawRectangleLinesEx({p.x+100, p.y+50, 150, 15}, 2, GRAY);
-    DrawRectangleLinesEx({ p.x, p.y, 100, 150 }, 2, GRAY);
-}
-
 void draw_game() {
     const Vector2 SCREEN_SIZE = {static_cast<float>(GetScreenWidth()), static_cast<float>(GetScreenHeight())};
 
@@ -50,5 +45,4 @@ void draw_game() {
         cameraBtnSize.y
     };
     GuiButton(cameraBtnRect, "use cameras button");
-    draw_map({200, 200});
 }
