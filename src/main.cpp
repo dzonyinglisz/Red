@@ -14,6 +14,7 @@ int main()
 {
     Engine engine;
 
+    SetConfigFlags(FLAG_WINDOW_RESIZABLE | FLAG_WINDOW_HIGHDPI);
     InitWindow(1024, 768, "raygui - i forgor");
     SetTargetFPS(60);
 
