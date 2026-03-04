@@ -2,7 +2,7 @@
 #define RAYGUI_IMPLEMENTATION
 #include "core/raygui.h"
 
-#include "game_main.h"
+#include "core/game_main.h"
 #include "core/engine.h"
 
 int main()
