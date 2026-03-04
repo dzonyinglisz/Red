@@ -1,10 +1,6 @@
-//
-// Created by catnip on 2/20/26.
-//
-
 #include "engine.h"
 
-#include <algorithm>
+#include <cstddef>
 #include "raylib.h"
 
 

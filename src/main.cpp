@@ -1,8 +1,3 @@
-//
-// Created by catnip on 2/19/26.
-// with orl0pl on same day and days after
-//
-
 #include <raylib.h>
 #define RAYGUI_IMPLEMENTATION
 #include "core/raygui.h"

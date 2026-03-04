@@ -1,7 +1,3 @@
-//
-// Created by catnip on 2/20/26.
-//
-
 #include <string>
 
 #include "../core/raygui.h"

@@ -1,7 +1,3 @@
-//
-// Created by catnip on 2/19/26.
-//
-
 #ifndef REDPROJECT_ENTITY_H
 #define REDPROJECT_ENTITY_H
 
