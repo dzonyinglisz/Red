@@ -2,6 +2,7 @@
 
 #include "../core/raygui.h"
 #include "../core/engine.h"
+#include "raylib.h"
 
 
 int count = 0;
@@ -9,6 +10,10 @@ int count = 0;
 
 void draw_game();
 void game_main(Engine *engine) {
+    SetConfigFlags(FLAG_WINDOW_HIGHDPI);
+    SetWindowTitle("FNaZST - ORIGINS");
+    SetWindowSize(1024*GetWindowScaleDPI().x, 768*GetWindowScaleDPI().y);
+
     engine->addDrawFunc(&draw_game);
 }
 

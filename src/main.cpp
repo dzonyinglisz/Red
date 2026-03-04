@@ -9,8 +9,9 @@ int main()
 {
     Engine engine;
 
+    // Defaults (can be changed later)
     SetConfigFlags(FLAG_WINDOW_RESIZABLE | FLAG_WINDOW_HIGHDPI);
-    InitWindow(1024, 768, "raygui - i forgor");
+    InitWindow(1024, 768, "new raylib window");
     SetTargetFPS(60);
 
     game_main(&engine);
