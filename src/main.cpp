@@ -1,20 +1,17 @@
-//
-// Created by catnip on 2/19/26.
-// with orl0pl on same day and days after
-//
-
 #include <raylib.h>
 #define RAYGUI_IMPLEMENTATION
 #include "core/raygui.h"
 
-#include "game_main.h"
+#include "core/game_main.h"
 #include "core/engine.h"
 
 int main()
 {
     Engine engine;
 
-    InitWindow(1024, 768, "raygui - i forgor");
+    // Defaults (can be changed later)
+    SetConfigFlags(FLAG_WINDOW_RESIZABLE | FLAG_WINDOW_HIGHDPI);
+    InitWindow(1024, 768, "new raylib window");
     SetTargetFPS(60);
 
     game_main(&engine);
