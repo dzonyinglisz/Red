@@ -1,0 +1,1 @@
+#include "CyfraEntity.h"
