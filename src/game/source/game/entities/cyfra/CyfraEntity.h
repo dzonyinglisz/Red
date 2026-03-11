@@ -1,7 +1,7 @@
 #ifndef REDPROJECT_CYFRAENTITY_H
 #define REDPROJECT_CYFRAENTITY_H
 
-#include "game/source/entities/entity.h"
+#include "../entity.h"
 
 
 // Works similarly to foxy in FNaF 1
