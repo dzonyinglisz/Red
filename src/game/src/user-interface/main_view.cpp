@@ -39,24 +39,25 @@ void MainGameView::drawOfficeUi() {
     // cameras and mask buttons
     const Vector2 officeBtnSize = {SCREEN_SIZE.x * 0.45f, 30.0f};
     const float officeBtnOffset = officeBtnSize.x * 0.1f;
-    const Rectangle officeBtnBoundingBox = {
+    const Rectangle cameraBtnBoundBox = {
         officeBtnOffset,
         SCREEN_SIZE.y-officeBtnSize.y-(officeBtnOffset*0.5f),
         officeBtnSize.x,
         officeBtnSize.y
     };
-    
-    if (GuiButton(officeBtnBoundingBox, "CAM BUTTON")){
+    const Rectangle maskBtnBoundBox = {
+        SCREEN_SIZE.x-officeBtnOffset-officeBtnSize.x,
+        SCREEN_SIZE.y-officeBtnSize.y-(officeBtnOffset*0.5f),
+        officeBtnSize.x,
+        officeBtnSize.y
+    };
+
+    if (GuiButton(cameraBtnBoundBox, "CAM BUTTON")){
         current_state = UiState::CAMERAS;
     }
-    GuiButton(
-        (Rectangle){
-            SCREEN_SIZE.x-officeBtnOffset-officeBtnSize.x,
-            SCREEN_SIZE.y-officeBtnSize.y-(officeBtnOffset*0.5f),
-            officeBtnSize.x,
-            officeBtnSize.y
-        }, 
-        "MASK BUTTON");
+    if (GuiButton(maskBtnBoundBox, "MASK BUTTON")) {
+        current_state = UiState::MASK;
+    }
 }
 void MainGameView::drawCamerasUi() {
 
