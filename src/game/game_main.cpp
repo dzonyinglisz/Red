@@ -16,9 +16,9 @@ void game_main(Engine *engine) {
 
 void draw_game() {
     const Vector2 SCREEN_SIZE = {
-        static_cast<float>(GetScreenWidth()), 
-        static_cast<float>(GetScreenHeight())};
-    //
+        static_cast<float>(GetScreenWidth()),
+        static_cast<float>(GetScreenHeight())
+    };
 
     // OFFICE UI ( HOUR, CAMERAS BTN, MASK BTN )
     {
