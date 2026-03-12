@@ -10,9 +10,9 @@ MainGameView gameView;
 
 void draw_game();
 void game_main(Engine *engine) {
-    SetConfigFlags(FLAG_WINDOW_HIGHDPI);
+    SetWindowState(FLAG_WINDOW_HIGHDPI);
     SetWindowTitle("FNaZST - ORIGINS");
-    SetWindowSize(1024*GetWindowScaleDPI().x, 768*GetWindowScaleDPI().y);
+    SetWindowSize(1024, 768);
 
     engine->addDrawFunc(&draw_game);
 }
