@@ -1,8 +1,8 @@
 #include <string>
 
-#include "../core/raygui.h"
 #include "../core/engine.h"
 #include "raylib.h"
+#include <raygui.h>
 
 
 void draw_game();
