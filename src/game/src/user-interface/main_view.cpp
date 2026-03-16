@@ -32,8 +32,8 @@ void MainGameView::drawUi() {
 
 void MainGameView::drawOfficeUi() {
     const Vector2 SCREEN_SIZE = {
-        static_cast<float>(GetScreenWidth()),
-        static_cast<float>(GetScreenHeight())
+        static_cast<float>(GetScreenWidth()/GetWindowScaleDPI().x),
+        static_cast<float>(GetScreenHeight()/GetWindowScaleDPI().y)
     };
 
     // cameras and mask buttons
@@ -61,8 +61,8 @@ void MainGameView::drawOfficeUi() {
 }
 void MainGameView::drawCamerasUi() {
     const Vector2 SCREEN_SIZE = {
-        static_cast<float>(GetScreenWidth()),
-        static_cast<float>(GetScreenHeight())
+        static_cast<float>(GetScreenWidth()/GetWindowScaleDPI().x),
+        static_cast<float>(GetScreenHeight()/GetWindowScaleDPI().y)
     };
 
 
@@ -72,6 +72,26 @@ void MainGameView::drawCamerasUi() {
         SCREEN_SIZE.x/3, SCREEN_SIZE.x/3
     };
     DrawRectangleRec(cameraMapGui, WHITE);
+    const Vector2 buttonsOrigin = {cameraMapGui.x, cameraMapGui.y};
+    const Vector2 camButtonSize = {100.0f, 30.0f};
+    const Rectangle camButtons[14] = {
+        (Rectangle){buttonsOrigin.x, buttonsOrigin.y, camButtonSize.x, camButtonSize.y},
+        (Rectangle){buttonsOrigin.x + 105.0f, buttonsOrigin.y, camButtonSize.x, camButtonSize.y},
+        (Rectangle){buttonsOrigin.x, buttonsOrigin.y + 35.0f, camButtonSize.x, camButtonSize.y},
+    };
+    for (int i = 0; i < 14; i++) {
+        std::string name = "CAM A" + std::to_string(i);
+        if (GuiButton(camButtons[i], name.c_str())) {
+            current_cam = i;
+        }
+    }
+
+    // DEBUG
+    DrawText(
+        std::to_string(current_cam).c_str(), 
+        SCREEN_SIZE.x / 2, SCREEN_SIZE.y / 2, 
+        20, WHITE
+    );
 
 
     // Back to office button
@@ -90,8 +110,8 @@ void MainGameView::drawCamerasUi() {
 
 void MainGameView::drawMaskUi() {
     const Vector2 SCREEN_SIZE = {
-        static_cast<float>(GetScreenWidth()),
-        static_cast<float>(GetScreenHeight())
+        static_cast<float>(GetScreenWidth()/GetWindowScaleDPI().x),
+        static_cast<float>(GetScreenHeight()/GetWindowScaleDPI().y)
     };
 
     // Back to office button

@@ -18,6 +18,7 @@ enum class UiState {
 class MainGameView {
 public:
     UiState current_state = UiState::OFFICE;
+    int current_cam = 0;
 
     void drawUi();
 
