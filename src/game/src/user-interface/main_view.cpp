@@ -50,8 +50,8 @@ void MainGameView::drawUi()
 void MainGameView::drawOfficeUi()
 {
     const Vector2 SCREEN_SIZE = {
-        static_cast<float>(GetScreenWidth() / GetWindowScaleDPI().x),
-        static_cast<float>(GetScreenHeight() / GetWindowScaleDPI().y)};
+        static_cast<float>(GetScreenWidth()),
+        static_cast<float>(GetScreenHeight())};
 
     // cameras and mask buttons
     const Vector2 officeBtnSize = {SCREEN_SIZE.x * 0.45f, 30.0f};
@@ -79,8 +79,8 @@ void MainGameView::drawOfficeUi()
 void MainGameView::drawCamerasUi()
 {
     const Vector2 SCREEN_SIZE = {
-        static_cast<float>(GetScreenWidth() / GetWindowScaleDPI().x),
-        static_cast<float>(GetScreenHeight() / GetWindowScaleDPI().y)};
+        static_cast<float>(GetScreenWidth()),
+        static_cast<float>(GetScreenHeight())};
 
     const Rectangle cameraMapGui = {
         SCREEN_SIZE.x - (SCREEN_SIZE.x / 3) - 4,
@@ -126,8 +126,8 @@ void MainGameView::drawCamerasUi()
 void MainGameView::drawMaskUi()
 {
     const Vector2 SCREEN_SIZE = {
-        static_cast<float>(GetScreenWidth() / GetWindowScaleDPI().x),
-        static_cast<float>(GetScreenHeight() / GetWindowScaleDPI().y)};
+        static_cast<float>(GetScreenWidth()),
+        static_cast<float>(GetScreenHeight())};
 
     // Back to office button
     const Vector2 officeBtnSize = {SCREEN_SIZE.x * 0.45f, 30.0f};
