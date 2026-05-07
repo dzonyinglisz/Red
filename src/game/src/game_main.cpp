@@ -3,12 +3,17 @@
 #include "raylib.h"
 #include <raygui.h>
 
+void process_game(double dt);
+void draw_game();
+void load_fnaz_assets();
+
+// UI
 class MainGameView;
 MainGameView gameView;
 
-void process_game();
-void draw_game();
-void load_fnaz_assets();
+// Mechanics
+TimeKeeper timeKeeper(0);
+
 void game_main(Engine *engine)
 {
     SetWindowState(FLAG_WINDOW_HIGHDPI);
@@ -22,6 +27,9 @@ void game_main(Engine *engine)
 
     engine->addLoadFunc(&load_fnaz_assets);
     engine->addDrawFunc(&draw_game);
+    engine->addProcessFunc(&process_game);
+
+    gameView.timeKeeper = &timeKeeper;
 }
 
 void draw_game()
@@ -32,4 +40,9 @@ void draw_game()
 void load_fnaz_assets()
 {
     gameView.loadTextures();
+}
+
+void process_game(double dt)
+{
+    timeKeeper.progressTime(dt);
 }

@@ -23,10 +23,9 @@ void MainGameView::drawUi()
     else if (current_state == UiState::MASK)
         DrawTextureEx(maskView, {0, 0}, 0.0f, 3.0f, WHITE);
 
-    int tempNightMinutes = 186; // 3am
-
-    std::string hourText = std::to_string(tempNightMinutes / 60);
-    if (tempNightMinutes < 60)
+    int timeRounded = timeKeeper->time;
+    std::string hourText = std::to_string(timeRounded / 60);
+    if (timeRounded < 60)
         hourText += "PM";
     else
         hourText += "AM";
