@@ -1,5 +1,5 @@
-/.idea/
-/cmake-build-debug/
-/libs/raylib/
-build
-.cache
+./.idea/
+./cmake-build-debug/
+./libs/raylib/
+./build/
+./.cache
