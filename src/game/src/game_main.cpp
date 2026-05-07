@@ -3,27 +3,33 @@
 #include "raylib.h"
 #include <raygui.h>
 
-
 class MainGameView;
 MainGameView gameView;
 
-
 void process_game();
 void draw_game();
-void game_main(Engine *engine) {
+void load_fnaz_assets();
+void game_main(Engine *engine)
+{
     SetWindowState(FLAG_WINDOW_HIGHDPI);
     SetWindowTitle("FNaZST - ORIGINS");
 
     const Vector2 baseSize = {1024, 768};
     Vector2 scaledSize = {
         baseSize.x * GetWindowScaleDPI().x,
-        baseSize.y * GetWindowScaleDPI().y
-    };
+        baseSize.y * GetWindowScaleDPI().y};
     SetWindowSize(scaledSize.x, scaledSize.y);
 
+    engine->addLoadFunc(&load_fnaz_assets);
     engine->addDrawFunc(&draw_game);
 }
 
-void draw_game() {
+void draw_game()
+{
     gameView.drawUi();
+}
+
+void load_fnaz_assets()
+{
+    gameView.loadTextures();
 }

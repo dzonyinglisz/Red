@@ -3,8 +3,8 @@
 
 #include <vector>
 
-
-class Engine {
+class Engine
+{
 public:
     // Constructor and Destructor
     Engine() = default;
@@ -13,7 +13,7 @@ public:
     // Called every frame - each call functions from the assigned lists
     void process(double deltaTime) const;
     void draw() const;
-
+    void loadAll() const;
 
     // Setter and getter functions
     void addProcessFunc(void (*function)(double));
@@ -26,10 +26,12 @@ public:
     bool changeDrawPriority(void (*function)(), int priority);
     int getDrawPriority(void (*function)()) const;
 
+    void addLoadFunc(void (*function)());
+
 private:
     std::vector<void (*)(double)> activeProcessFunctions;
     std::vector<void (*)()> activeDrawFunctions;
+    std::vector<void (*)()> loadFunctions;
 };
 
-
-#endif //REDPROJECT_ENGINE_H
+#endif // REDPROJECT_ENGINE_H

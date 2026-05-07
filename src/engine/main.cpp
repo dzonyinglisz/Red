@@ -15,6 +15,7 @@ int main()
     SetTargetFPS(60);
 
     game_main(&engine);
+    engine.loadAll();
 
     while (!WindowShouldClose())
     {
