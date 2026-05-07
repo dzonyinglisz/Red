@@ -3,3 +3,4 @@
 ./libs/raylib/
 ./build/
 ./.cache
+build
