@@ -24,6 +24,7 @@ public:
     int current_cam = 0;
     void loadTextures();
     Texture officeView;
+    Texture maskView;
     void drawUi();
 
 private:

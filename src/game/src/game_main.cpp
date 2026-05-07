@@ -14,7 +14,7 @@ void game_main(Engine *engine)
     SetWindowState(FLAG_WINDOW_HIGHDPI);
     SetWindowTitle("FNaZST - ORIGINS");
 
-    const Vector2 baseSize = {1024, 768};
+    const Vector2 baseSize = {320 * 3, 256 * 3};
     Vector2 scaledSize = {
         baseSize.x * GetWindowScaleDPI().x,
         baseSize.y * GetWindowScaleDPI().y};

@@ -8,25 +8,21 @@
 
 void MainGameView::loadTextures()
 {
+    Image maskViewImg = LoadImage("assets/maskview.png");
     Image officeViewImg = LoadImage("assets/officeview.png");
-    if (officeViewImg.width < 10)
-    {
-
-        TraceLog(LOG_FATAL, "Texture didn't load TwT");
-        throw;
-    }
+    maskView = LoadTextureFromImage(maskViewImg);
     officeView = LoadTextureFromImage(officeViewImg);
-    if (officeView.width < 10)
-    {
-        TraceLog(LOG_FATAL, "Texture didn't load TwT");
-        throw;
-    }
     UnloadImage(officeViewImg);
-    TraceLog(LOG_DEBUG, "Load OK!");
+    UnloadImage(maskViewImg);
 }
 
 void MainGameView::drawUi()
 {
+    if (current_state == UiState::OFFICE)
+        DrawTextureEx(officeView, {0, 0}, 0.0f, 3.0f, WHITE);
+    else if (current_state == UiState::MASK)
+        DrawTextureEx(maskView, {0, 0}, 0.0f, 3.0f, WHITE);
+
     int tempNightMinutes = 186; // 3am
 
     std::string hourText = std::to_string(tempNightMinutes / 60);
@@ -79,7 +75,6 @@ void MainGameView::drawOfficeUi()
     {
         current_state = UiState::MASK;
     }
-    DrawTexture(officeView, 100, 100, WHITE);
 }
 void MainGameView::drawCamerasUi()
 {
