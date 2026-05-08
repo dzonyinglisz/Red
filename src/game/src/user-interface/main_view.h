@@ -2,7 +2,7 @@
 #include <raylib.h>
 #include <raygui.h>
 #include "game/src/mechanics/time.h"
-
+#include <cstdlib>
 enum class UiState
 {
     CLEAR,
@@ -28,6 +28,8 @@ public:
     Texture officeView;
     Texture maskView;
     void drawUi();
+    Texture cameraNoise;
+    Color *noisePixels;
 
 private:
     void drawOfficeUi();

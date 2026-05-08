@@ -13,6 +13,6 @@ This project is structured like so:
 | RAYLIB | C library we use as a base for this custom engine                    |
 | ENGINE | C++ class used as a way to communicate with the Engine functionality |
 | GAME   | This is where the game implementation resides                        |
-| USER   |                                                                      |
+| USER   | Despite everything it's still you                                    |
 
 Where the `GAME` segment gets split into custom classes like Entities and other game mechanics.

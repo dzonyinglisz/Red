@@ -14,6 +14,11 @@ void MainGameView::loadTextures()
     officeView = LoadTextureFromImage(officeViewImg);
     UnloadImage(officeViewImg);
     UnloadImage(maskViewImg);
+
+    // procedular
+    noisePixels = (Color *)malloc(320 * 256 * sizeof(Color));
+    Image whitenoise = GenImageWhiteNoise(320, 256, 3.0f);
+    cameraNoise = LoadTextureFromImage(whitenoise);
 }
 
 void MainGameView::drawUi()
@@ -48,6 +53,7 @@ void MainGameView::drawUi()
 
 void MainGameView::drawOfficeUi()
 {
+
     const Vector2 SCREEN_SIZE = {
         static_cast<float>(GetScreenWidth()),
         static_cast<float>(GetScreenHeight())};
@@ -77,6 +83,17 @@ void MainGameView::drawOfficeUi()
 }
 void MainGameView::drawCamerasUi()
 {
+    for (int i = 0; i < 320 * 256; ++i)
+    {
+        unsigned char v = rand() & 0xFF; // 0-255
+        noisePixels[i].r = v;
+        noisePixels[i].g = v;
+        noisePixels[i].b = v;
+        noisePixels[i].a = 255;
+    }
+    // push pixels to GPU
+    UpdateTexture(cameraNoise, noisePixels);
+    DrawTextureEx(cameraNoise, {0, 0}, 0.0f, 3.0f, WHITE);
     const Vector2 SCREEN_SIZE = {
         static_cast<float>(GetScreenWidth()),
         static_cast<float>(GetScreenHeight())};
@@ -103,8 +120,10 @@ void MainGameView::drawCamerasUi()
     }
 
     // DEBUG
+    const char *camText = TextFormat("CAM %s", std::to_string(current_cam).c_str());
+    DrawRectangle(SCREEN_SIZE.x / 2, SCREEN_SIZE.y / 2, MeasureText(camText, 20), 20, BLACK);
     DrawText(
-        std::to_string(current_cam).c_str(),
+        camText,
         SCREEN_SIZE.x / 2, SCREEN_SIZE.y / 2,
         20, WHITE);
 
