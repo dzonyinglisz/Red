@@ -45,11 +45,13 @@ bool Engine::removeProcessFunc(void (*function)(double))
 {
     bool was_removed = false;
 
-    for (size_t i = 0; i < activeProcessFunctions.size(); i++)
+    for (size_t i = 0; i < activeProcessFunctions.size();)
     {
-        void (*func)(double) = activeProcessFunctions[i];
-        if (func != function)
+        if (activeProcessFunctions[i] != function)
+        {
+            ++i;
             continue;
+        }
         activeProcessFunctions.erase(activeProcessFunctions.begin() + i);
         was_removed = true;
     }
@@ -64,6 +66,15 @@ bool Engine::changeProcessPriority(void (*function)(double), int priority)
     {
         return false; // Function not found
     }
+
+    // Clamp the requested priority into the valid index range to avoid an
+    // out-of-bounds insert iterator (undefined behaviour).
+    const int lastIndex = static_cast<int>(activeProcessFunctions.size()) - 1;
+    if (priority < 0)
+        priority = 0;
+    else if (priority > lastIndex)
+        priority = lastIndex;
+
     if (currentPriority == priority)
     {
         return true; // No change needed
@@ -85,7 +96,7 @@ int Engine::getProcessPriority(void (*function)(double)) const
         void (*func)(double) = activeProcessFunctions[i];
         if (func != function)
             continue;
-        return i;
+        return static_cast<int>(i);
     }
     return -1;
 }
@@ -99,11 +110,13 @@ bool Engine::removeDrawFunc(void (*function)())
 {
     bool was_removed = false;
 
-    for (size_t i = 0; i < activeDrawFunctions.size(); i++)
+    for (size_t i = 0; i < activeDrawFunctions.size();)
     {
-        void (*func)() = activeDrawFunctions[i];
-        if (func != function)
+        if (activeDrawFunctions[i] != function)
+        {
+            ++i;
             continue;
+        }
         activeDrawFunctions.erase(activeDrawFunctions.begin() + i);
         was_removed = true;
     }
@@ -118,6 +131,15 @@ bool Engine::changeDrawPriority(void (*function)(), int priority)
     {
         return false; // Function not found
     }
+
+    // Clamp the requested priority into the valid index range to avoid an
+    // out-of-bounds insert iterator (undefined behaviour).
+    const int lastIndex = static_cast<int>(activeDrawFunctions.size()) - 1;
+    if (priority < 0)
+        priority = 0;
+    else if (priority > lastIndex)
+        priority = lastIndex;
+
     if (currentPriority == priority)
     {
         return true; // No change needed
