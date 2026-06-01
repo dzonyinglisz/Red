@@ -3,22 +3,30 @@
 #include <string>
 #include <raylib.h>
 #include <raygui.h>
-#include <thread>
-#include <iostream>
 
 void MainGameView::loadTextures()
 {
-    Image maskViewImg = LoadImage("assets/maskview.png");
-    Image officeViewImg = LoadImage("assets/officeview.png");
+    // Resolve assets relative to the executable so the game runs from any CWD.
+    const std::string assetDir = std::string(GetApplicationDirectory()) + "assets/";
+    Image maskViewImg = LoadImage((assetDir + "maskview.png").c_str());
+    Image officeViewImg = LoadImage((assetDir + "officeview.png").c_str());
     maskView = LoadTextureFromImage(maskViewImg);
     officeView = LoadTextureFromImage(officeViewImg);
     UnloadImage(officeViewImg);
     UnloadImage(maskViewImg);
 
-    // procedular
-    noisePixels = (Color *)malloc(320 * 256 * sizeof(Color));
+    // procedural camera static
+    noisePixels.resize(320 * 256);
     Image whitenoise = GenImageWhiteNoise(320, 256, 3.0f);
     cameraNoise = LoadTextureFromImage(whitenoise);
+    UnloadImage(whitenoise);
+}
+
+void MainGameView::unloadTextures()
+{
+    UnloadTexture(officeView);
+    UnloadTexture(maskView);
+    UnloadTexture(cameraNoise);
 }
 
 void MainGameView::drawUi()
@@ -28,12 +36,13 @@ void MainGameView::drawUi()
     else if (current_state == UiState::MASK)
         DrawTextureEx(maskView, {0, 0}, 0.0f, 3.0f, WHITE);
 
-    int timeRounded = timeKeeper->time;
-    std::string hourText = std::to_string(timeRounded / 60);
-    if (timeRounded < 60)
-        hourText += "PM";
-    else
-        hourText += "AM";
+    const int totalMinutes = static_cast<int>(timeKeeper->time);
+    const int hour24 = (totalMinutes / 60) % 24;
+    int displayHour = hour24 % 12;
+    if (displayHour == 0)
+        displayHour = 12;
+    const char *meridiem = (hour24 < 12) ? "AM" : "PM";
+    std::string hourText = std::to_string(displayHour) + " " + meridiem;
 
     // Drawing: hour
     int defaultTextSize = GuiGetStyle(DEFAULT, TEXT_SIZE);
@@ -92,7 +101,7 @@ void MainGameView::drawCamerasUi()
         noisePixels[i].a = 255;
     }
     // push pixels to GPU
-    UpdateTexture(cameraNoise, noisePixels);
+    UpdateTexture(cameraNoise, noisePixels.data());
     DrawTextureEx(cameraNoise, {0, 0}, 0.0f, 3.0f, WHITE);
     const Vector2 SCREEN_SIZE = {
         static_cast<float>(GetScreenWidth()),
@@ -105,12 +114,13 @@ void MainGameView::drawCamerasUi()
     DrawRectangleRec(cameraMapGui, WHITE);
     const Vector2 buttonsOrigin = {cameraMapGui.x, cameraMapGui.y};
     const Vector2 camButtonSize = {100.0f, 30.0f};
-    const Rectangle camButtons[14] = {
+    const Rectangle camButtons[] = {
         (Rectangle){buttonsOrigin.x, buttonsOrigin.y, camButtonSize.x, camButtonSize.y},
         (Rectangle){buttonsOrigin.x + 105.0f, buttonsOrigin.y, camButtonSize.x, camButtonSize.y},
         (Rectangle){buttonsOrigin.x, buttonsOrigin.y + 35.0f, camButtonSize.x, camButtonSize.y},
     };
-    for (int i = 0; i < 14; i++)
+    const int camButtonCount = sizeof(camButtons) / sizeof(camButtons[0]);
+    for (int i = 0; i < camButtonCount; i++)
     {
         std::string name = "CAM A" + std::to_string(i);
         if (GuiButton(camButtons[i], name.c_str()))

@@ -27,11 +27,14 @@ public:
     int getDrawPriority(void (*function)()) const;
 
     void addLoadFunc(void (*function)());
+    void addUnloadFunc(void (*function)());
+    void unloadAll() const;
 
 private:
     std::vector<void (*)(double)> activeProcessFunctions;
     std::vector<void (*)()> activeDrawFunctions;
     std::vector<void (*)()> loadFunctions;
+    std::vector<void (*)()> unloadFunctions;
 };
 
 #endif // REDPROJECT_ENGINE_H

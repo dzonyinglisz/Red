@@ -3,6 +3,7 @@
 #include <raygui.h>
 #include "game/src/mechanics/time.h"
 #include <cstdlib>
+#include <vector>
 enum class UiState
 {
     CLEAR,
@@ -25,11 +26,12 @@ public:
     TimeKeeper *timeKeeper;
     int current_cam = 0;
     void loadTextures();
+    void unloadTextures();
     Texture officeView;
     Texture maskView;
     void drawUi();
     Texture cameraNoise;
-    Color *noisePixels;
+    std::vector<Color> noisePixels;
 
 private:
     void drawOfficeUi();

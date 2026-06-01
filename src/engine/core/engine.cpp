@@ -36,6 +36,19 @@ void Engine::addLoadFunc(void (*function)())
     loadFunctions.push_back(function);
 }
 
+void Engine::addUnloadFunc(void (*function)())
+{
+    unloadFunctions.push_back(function);
+}
+
+void Engine::unloadAll() const
+{
+    for (void (*func)() : unloadFunctions)
+    {
+        func(); // Call the function
+    }
+}
+
 void Engine::addProcessFunc(void (*function)(double))
 {
     activeProcessFunctions.push_back(function);
