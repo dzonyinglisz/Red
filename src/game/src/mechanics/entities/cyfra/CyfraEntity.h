@@ -5,7 +5,7 @@
 
 
 // Works similarly to foxy in FNaF 1
-class CyfraEntity: Entity {
+class CyfraEntity: public Entity {
 public:
     explicit CyfraEntity(Room *closet_room) : closet_room(closet_room) {}
 

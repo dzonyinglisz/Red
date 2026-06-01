@@ -4,7 +4,7 @@
 #include "../entity.h"
 
 
-class LowkeyEntity: Entity {
+class LowkeyEntity: public Entity {
 public:
     
 
