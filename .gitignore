@@ -1,7 +1,12 @@
-./.idea/
-./cmake-build-debug/
-./libs/raylib/
-./build/
-./build/*
-./.cache
-build
+# IDE / editor
+.idea/
+.vscode/
+*~
+
+# CMake build output (FetchContent deps land under build/_deps)
+build/
+cmake-build-debug/
+cmake-build-*/
+
+# Caches
+.cache/
