@@ -6,6 +6,7 @@
 void process_game(double dt);
 void draw_game();
 void load_fnaz_assets();
+void unload_fnaz_assets();
 
 // UI
 class MainGameView;
@@ -28,6 +29,7 @@ void game_main(Engine *engine)
     engine->addLoadFunc(&load_fnaz_assets);
     engine->addDrawFunc(&draw_game);
     engine->addProcessFunc(&process_game);
+    engine->addUnloadFunc(&unload_fnaz_assets);
 
     gameView.timeKeeper = &timeKeeper;
 }
@@ -40,6 +42,11 @@ void draw_game()
 void load_fnaz_assets()
 {
     gameView.loadTextures();
+}
+
+void unload_fnaz_assets()
+{
+    gameView.unloadTextures();
 }
 
 void process_game(double dt)

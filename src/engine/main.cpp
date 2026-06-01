@@ -22,6 +22,7 @@ int main()
         engine.process(GetFrameTime());
         engine.draw();
     }
+    engine.unloadAll(); // release game-owned resources while the GL context is still alive
     CloseWindow();
     return 0;
 }
