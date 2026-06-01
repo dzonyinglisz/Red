@@ -13,13 +13,13 @@ set(BUILD_GAMES    OFF CACHE BOOL "" FORCE) # don't build the supplied example g
 FetchContent_Declare(
         raylib
         GIT_REPOSITORY "https://github.com/raysan5/raylib.git"
-        GIT_TAG "master"
+        GIT_TAG "5.5" # pinned release tag for reproducible builds (was floating "master")
         GIT_PROGRESS TRUE
 )
 FetchContent_Declare(
         raygui
         GIT_REPOSITORY "https://github.com/raysan5/raygui.git"
-        GIT_TAG "master"
+        GIT_TAG "4.0" # pinned release tag for reproducible builds (was floating "master")
         GIT_PROGRESS TRUE
 )
 
